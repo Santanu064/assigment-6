@@ -1,0 +1,1108 @@
+/* ==========================================================================
+   Two Leaves and a Bud - Homepage Clone Stylesheet
+   HIGH FIDELITY UPDATE: Exact layout alignment with the live site
+   ========================================================================== */
+
+/* 1. Imports & Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap');
+
+/* 2. CSS Design Variables (Tokens) */
+:root {
+  /* Colors */
+  --color-brand: #2a2857;          /* Brand Navy/Indigo */
+  --color-brand-light: #44417d;    /* Light Brand Navy */
+  --color-text: #201c1a;           /* Primary Copy Dark Brown/Charcoal */
+  --color-bg-cream: #FBF9EB;       /* Organic Off-white/Cream Background */
+  --color-white: #ffffff;          /* Pure White */
+  --color-gray-light: #f5f5f5;     /* Light gray for borders/dividers */
+  --color-gray-medium: #cacaca;    /* Medium gray */
+  --color-accent-red: #ea6854;     /* Red/Coral for Badges/Accents */
+  --color-blue: blue;
+  /* Variety Card Specific Backgrounds */
+  --color-variety-green: #ADE674;
+  --color-variety-lavender: #D9C2E1;
+  --color-variety-peach: #F5AF8A;
+  --color-variety-yellow: #FFD265;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Figtree', sans-serif;
+  
+  /* Layout Dimensions */
+  --max-width: 1280px;
+}
+
+/* 3. Base Reset & Defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg-cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* 4. Utility Classes */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+}
+
+.section-padding {
+  padding: 100px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--color-brand);
+}
+
+.section-title {
+  font-size: 5.2rem;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.section-title.h1 {
+  text-transform: uppercase;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  max-width: 650px;
+  margin: 0 auto 50px;
+}
+
+/* Small decorated titles like "Best sellers" */
+.small-title {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin-bottom: 80px;
+  border: 1px solid black;
+  background-color: #D9C2E1;
+  padding: 5px;
+  border-radius: 10px;
+  transform: rotate(355deg);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-brand);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  border-color: var(--color-text);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-brand);
+  transform: translateY(-2px);
+}
+
+/* Accents & Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 5. Floating Header & Symmetrical Layout */
+.announcement-bar {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 101;
+}
+
+.header {
+  position: fixed;
+  top:15px;
+  left: 0;
+  width: 100%;
+  padding: 15px 30px; /* Floating Offset */
+  z-index: 100;
+  background: transparent;
+  pointer-events: none; /* Let clicks pass spacing */
+  transition: transform 0.4s ease;
+}
+
+.header-inner {
+  pointer-events: auto; /* Re-enable clicks inside header */
+  background-color: #FFFEFB;
+  border-radius: 12px;
+  height: 67px;
+  border: 1px solid var(--color-text);
+  box-shadow: 0 4px 15px rgba(32, 28, 26, 0.06);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "left center right";
+  align-items: center;
+  padding: 0 25px;
+  width: 100%;
+}
+
+.header-left {
+  grid-area: left;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  justify-content: flex-start;
+}
+
+.header-center {
+  grid-area: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right {
+  grid-area: right;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  justify-content: flex-end;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-brand);
+  padding: 5px 0;
+  position: relative;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+.cart-btn {
+  font-weight: 500;
+  color: var(--color-brand);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.cart-count {
+  font-size: 0.85rem;
+}
+
+/* Hamburger toggle inside header */
+.hamburger {
+  display: none; /* Desktop hidden */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 22px;
+  height: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+/* 6. Section Styles */
+
+/* Section 1: Hero Banner (95vh Full Height) */
+.hero-section {
+  position: relative;
+  background-image: url('https://www.twoleavestea.com/cdn/shop/files/AlpineBerry.webp?v=1774284236&width=1280');
+  background-size: cover;
+  background-position: center;
+  height: 95vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end; /* Bottom alignment */
+  padding-bottom: 80px;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(32, 28, 26, 0.2); /* Soft overlay */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  color: var(--color-white);
+  padding-left: 20px;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  color: var(--color-white);
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  margin-bottom: 30px;
+  color: var(--color-white);
+  opacity: 0.95;
+  max-width: 480px;
+}
+
+.hero-content .btn-primary {
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-brand);
+}
+
+.hero-content .btn-primary:hover {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  border-color: var(--color-white);
+}
+
+/* Scroll Down indicator arrow */
+.scroll-down {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scroll-down img {
+  width: 38px;
+  height: 38px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* Section 3: Product Grid (Best Sellers) */
+.sellers-section {
+  background-color: var(--color-bg-cream);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: transparent; /* Transparent body */
+}
+
+/* Colored Media Container */
+.product-card__media {
+  position: relative;
+  height: 320px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card__media {
+  transform: translateY(-4px);
+}
+
+.product-card__media img {
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-card__media img {
+  transform: scale(1.04);
+}
+
+/* Absolute tags overlay */
+.product-card__tags {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 5;
+}
+
+.product-card__tag {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-text);
+}
+
+.product-card__info-rating {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 5;
+  color: var(--color-text);
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Absolute Add Button on Media card */
+.product-card__product-form-trigger {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 5;
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-brand);
+}
+
+.product-card__product-form-trigger:hover {
+  background-color: var(--color-white);
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+/* Info block below card */
+.product-card__info {
+  padding: 15px 5px 0;
+  text-align: left;
+}
+
+.product-card__info-title {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: var(--color-brand);
+  line-height: 1.2;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.product-card__info-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.product-card__info-description {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Section 4: Vibe / Search Selector */
+.vibe-section {
+  background-color: var(--color-bg-cream);
+  border-top: 1px solid var(--color-gray-medium);
+  border-bottom: 1px solid var(--color-gray-medium);
+  padding: 100px 0;
+}
+
+.search-section-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left aligned inside centered container */
+}
+
+/* Orange Sticker Badge */
+.discover-badge {
+  background-color: #FF7F31;
+  color: #201c1a;
+  border: 1.5px solid #201c1a;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  display: inline-block;
+  transform: rotate(-3deg);
+  margin-bottom: 25px;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+}
+
+/* Serif Headings */
+.search-title-heading {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: var(--color-brand);
+  line-height: 1.15;
+  margin-bottom: 35px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.search-title-heading em {
+  font-style: italic;
+}
+
+/* Input Styling */
+.search-input-wrapper {
+  width: 100%;
+  max-width: 390px;
+  margin-bottom: 45px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #201c1a;
+  border-radius: 12px;
+  padding: 0 20px;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  outline: none;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input-wrapper input:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 10px rgba(42, 40, 87, 0.1);
+}
+
+/* Explore Suggestions */
+.vibe-explore-container {
+  width: 100%;
+  text-align: left;
+}
+
+.vibe-explore-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 15px;
+  letter-spacing: 0.05em;
+}
+
+.vibe-explore-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* Periwinkle Tag Buttons */
+.vibe-tag-btn {
+  font-family: var(--font-serif);
+  font-size: 1.25rem; /* ~20px */
+  letter-spacing: -0.005em;
+  background-color: #daeaff; /* Light periwinkle */
+  color: var(--color-text);
+  padding: 10px 20px;
+  border: 1px solid #201c1a;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(.5,0,0,1);
+}
+
+.vibe-tag-btn:hover {
+  background-color: #a2c9fc; /* Darker periwinkle on hover */
+}
+
+/* Section 5: Origins (Dark Forest Image Overlay) */
+.origins-section {
+  position: relative;
+  background-image: url('https://www.twoleavestea.com/cdn/shop/files/adam-vradenburg-_gu7E90QChU-unsplash_1_1.webp?v=1771592855&width=2560');
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.origins-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(42, 40, 87, 0.7); /* Translucent Brand Navy overlay */
+}
+
+.origins-container {
+  position: relative;
+  z-index: 10;
+}
+
+.origins-section h2 {
+  color: var(--color-white);
+  font-size: 3.5rem;
+}
+
+.origins-lead {
+  font-size: 1.8rem;
+  color: var(--color-white);
+  max-width: 900px;
+  margin: 0 auto 60px;
+  line-height: 1.35;
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.origins-icons-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 50px;
+}
+
+.origin-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 250px;
+}
+
+.origin-icon-box {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.origin-icon-box img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.origin-icon-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+}
+
+/* Section 6: Testimonials */
+.testimonials-section {
+  background-color: var(--color-bg-cream);
+  padding: 100px 0;
+  border-bottom: 1px solid var(--color-gray-medium);
+}
+
+.testimonials-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* Reviews Badge */
+.reviews-badge {
+  background-color: #73BC25;
+  color: #201c1a;
+  border: 1.5px solid #201c1a;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  display: inline-block;
+  transform: rotate(-3deg);
+  margin-bottom: 25px;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+/* Headings */
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: var(--color-brand);
+  line-height: 1.15;
+  margin-bottom: 50px;
+  font-weight: 500;
+}
+
+.testimonials-heading em {
+  font-style: italic;
+}
+
+/* Row of Cards */
+.customer-testimonials__carousel {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.customer-testimonials__entry-v5 {
+  flex: 1 1 0px;
+  min-width: 0;
+  display: flex;
+}
+
+.customer-testimonials__entry-v5-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-color);
+  color: #201c1a;
+  border: 1px solid #201c1a;
+  border-radius: 12px;
+  padding: 30px 10px 10px 10px;
+  transition: transform 0.3s cubic-bezier(.5,0,0,1), box-shadow 0.3s cubic-bezier(.5,0,0,1);
+}
+
+.customer-testimonials__entry-v5-inner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(32, 28, 26, 0.12);
+}
+
+.customer-testimonials__entry-v5-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 1;
+  margin-bottom: 25px;
+  padding: 0 10px;
+}
+
+.customer-testimonials__entry-v5-testimonial {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  color: #201c1a;
+  margin: 0 0 12px 0;
+  font-weight: 400;
+}
+
+.customer-testimonials__entry-v5-testimonial.customer-testimonials__entry-v5-testimonial--large {
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+
+.customer-testimonials__entry-v5-author {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #201c1a;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Bottom Shop Badge */
+.customer-testimonials__entry-v5-shop {
+  display: flex;
+  align-items: center;
+  background-color: var(--product-bg-color);
+  border: 1px solid #201c1a;
+  border-radius: 12px;
+  width: 100%;
+  overflow: hidden;
+  height: 60px;
+}
+
+.customer-testimonials__entry-v5-shop .image {
+  width: 60px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.customer-testimonials__entry-v5-shop .image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.customer-testimonials__entry-v5-shop .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 0 10px;
+  border-left: 1px solid #201c1a;
+  height: 100%;
+  min-width: 0;
+}
+
+.customer-testimonials__entry-v5-product-name {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--product-font-color);
+  margin: 0;
+  line-height: 1.1;
+  text-align: left;
+  flex-grow: 1;
+  padding-right: 5px;
+  word-wrap: break-word;
+}
+
+.customer-testimonials__entry-v5-button {
+  background: #ffffff;
+  color: #201c1a;
+  border: 1px solid #201c1a;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.customer-testimonials__entry-v5-button:hover {
+  background-color: #201c1a;
+  color: #ffffff;
+}
+
+/* Section 7: Wholesale Partners */
+.wholesale-section {
+  padding: 0;
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.wholesale-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wholesale-content {
+  flex: 1;
+  min-width: 320px;
+  padding: 100px 60px;
+}
+
+.wholesale-content h2 {
+  color: var(--color-white);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.wholesale-content p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  max-width: 500px;
+}
+
+.wholesale-content .btn-primary {
+  background-color: var(--color-bg-cream);
+  color: var(--color-brand);
+  border-color: var(--color-bg-cream);
+}
+
+.wholesale-content .btn-primary:hover {
+  background-color: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-white);
+}
+
+.wholesale-image {
+  flex: 1;
+  min-width: 320px;
+  align-self: stretch;
+  background-image: url('https://www.twoleavestea.com/cdn/shop/files/Our_Cafe_Wholesale_Partners.webp?v=1773753185&width=511');
+  background-size: cover;
+  background-position: center;
+  min-height: 450px;
+}
+
+/* ==========================================================================
+   9. Responsive Media Queries (Adaptive Design)
+   ========================================================================== */
+
+/* Tablet & Mobile Layouts (under 1024px) */
+@media screen and (max-width: 1024px) {
+  /* Mobile menu symmetrical grid template */
+  .header-inner {
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: "left center right";
+  }
+
+  .header-left {
+    justify-content: flex-start;
+  }
+  
+  .header-left .nav-link {
+    display: none; /* Hide link lists */
+  }
+
+  .header-right .nav-link {
+    display: none; /* Hide link lists */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger in left slot */
+  }
+
+  .footer-top {
+    gap: 30px;
+  }
+  
+  .footer-newsletter {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Small Screens (under 768px) */
+@media screen and (max-width: 768px) {
+  .section-title {
+    font-size: 2.4rem;
+  }
+  
+  .section-padding {
+    padding: 60px 0;
+  }
+
+  /* Header floating card scaling */
+  .header {
+    padding: 10px 15px;
+  }
+  .header-inner {
+    height: 60px;
+    padding: 0 15px;
+  }
+  .logo img {
+    height: 32px;
+  }
+
+  /* Hero Section adaptations */
+  .hero-section {
+    background-image: url('https://www.twoleavestea.com/cdn/shop/files/AlpineBerry_mobile.webp?v=1774284087&width=1280');
+    height: 85vh;
+    padding-bottom: 60px;
+  }
+
+  .hero-content {
+    margin: 0;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  /* Quote */
+  .quote-text {
+    font-size: 1.8rem;
+  }
+
+  /* Grid adjustments */
+  .product-grid, .barista-grid, .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  /* Testimonials swipeable row for mobile */
+  .customer-testimonials__carousel {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 10px 20px 30px 20px;
+    margin-left: -30px;
+    margin-right: -30px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .customer-testimonials__entry-v5 {
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+  }
+
+  .testimonials-heading {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  /* Origins */
+  .origins-section h2 {
+    font-size: 2.6rem;
+  }
+  .origins-lead {
+    font-size: 1.35rem;
+    margin-bottom: 40px;
+  }
+  .origins-icons-row {
+    gap: 30px;
+  }
+
+  /* Wholesale split view */
+  .wholesale-container {
+    flex-direction: column;
+  }
+
+  .wholesale-content {
+    padding: 60px 20px;
+  }
+
+  .wholesale-content h2 {
+    font-size: 2.4rem;
+  }
+
+  .wholesale-image {
+    min-height: 300px;
+    width: 100%;
+  }
+
+  /* Story Banner overlay alignment */
+  .story-banner {
+    justify-content: center;
+    padding: 40px 15px;
+  }
+
+  .story-content {
+    margin-right: 0;
+    max-width: 100%;
+    padding: 40px 20px;
+  }
+
+  .story-content h2 {
+    font-size: 2.2rem;
+  }
+
+  /* Footer */
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
